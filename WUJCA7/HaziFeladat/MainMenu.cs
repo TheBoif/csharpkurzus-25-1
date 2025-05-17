@@ -71,7 +71,7 @@ class Program
                     Console.Clear();
                     Console.WriteLine("A játék célja, hogy kitaláld a titkos színkombinációt, mely 4 színből áll.");
                     Console.WriteLine("A színek a következők lehetnek:");
-                    Console.WriteLine("  k - kék, z - zöld, p - piros, s - sárga, l - lila, n - narancs");
+                    Console.WriteLine("  k - kék, z - zöld, p - piros, s - sárga, l - lila, f - fehér");
                     Console.WriteLine("A színkombinációban lehetnek ismétlődő színek, és a sorrendjük is számít.");
                     Console.WriteLine("Minden tipp után kapsz egy visszajelzést, ami megmutatja, hogy a tippelt színek közül hány helyes, de rossz helyen (fehér) vagy helyes szín, és jó helyen (fekete).");
                     Console.WriteLine("A játék addig tart, amíg ki nem találod a színkombinációt, vagy a 10. tippre sem sikerül.");

@@ -19,9 +19,8 @@ public static class LeaderboardLogic
             return;
         }
         Console.WriteLine("Ranglista rendezése:");
-        Console.WriteLine(" 1. Játékok szerint (kevesebb tipp előre)");
-        Console.WriteLine(" 2. Játékosok szerint (átlagos tipp szerint)");
-        Console.Write("Válassz egy lehetőséget: ");
+        Console.WriteLine(" 1. Összes Játék");
+        Console.WriteLine(" 2. Játékosok átlaga");
         var key = Console.ReadKey(true).KeyChar;
         Console.Clear();
         if (key == '2')
@@ -45,10 +44,12 @@ public static class LeaderboardLogic
         else
         {
             var ordered = records.OrderBy(r => r.Guesses.Count).ToList();
-            Console.WriteLine("Játékok száma szerint rendezve (kevesebb tipp előre):");
+            Console.WriteLine("Összes Játék (legkevesebb tipp szerint):");
             foreach (var record in ordered)
             {
+                if (record.Guesses[record.Guesses.Count - 1] != record.Solution) Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{record.PlayerName}: {record.Guesses.Count} tipp, megoldás: {record.Solution}");
+                Console.BackgroundColor = ConsoleColor.DarkGray;
             }
         }
         Console.WriteLine("Nyomj egy gombot a visszatéréshez");

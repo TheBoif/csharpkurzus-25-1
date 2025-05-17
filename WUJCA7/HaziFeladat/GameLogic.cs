@@ -8,12 +8,13 @@ public static class GameLogic
 {
     public static async Task StartNewGame(string playerName)
     {
+        Console.SetWindowSize(200,40);
         Console.BackgroundColor = ConsoleColor.DarkGray;
         Console.Clear();
         string solution = GenerateSolution();
         List<char> guess = new List<char>();
         List<string> guesses = new List<string>();
-        Console.WriteLine("Írj be egy színt: (K)kék, (Z)zöld, (P)piros, (S)sárga, (L)lila, (N)narancs");
+        Console.WriteLine("Írj be egy színt: (K)kék, (Z)zöld, (P)piros, (S)sárga, (L)lila, (F)fehér");
         Console.WriteLine("nyomj (ESC) gombot a kilépéshez");
         while (true)
         {
@@ -27,7 +28,7 @@ public static class GameLogic
                input == ConsoleKey.P ||
                input == ConsoleKey.S ||
                input == ConsoleKey.L ||
-               input == ConsoleKey.N)
+               input == ConsoleKey.F)
             {
                 if (guess.Count < 4)
                 {
@@ -109,9 +110,9 @@ public static class GameLogic
             case ConsoleKey.S:
                 return ConsoleColor.Yellow;
             case ConsoleKey.L:
-                return ConsoleColor.Magenta;
-            case ConsoleKey.N:
-                return ConsoleColor.DarkYellow;
+                return ConsoleColor.DarkMagenta;
+            case ConsoleKey.F:
+                return ConsoleColor.White;
             default:
                 return ConsoleColor.DarkGray;
         }
@@ -179,7 +180,7 @@ public static class GameLogic
 
     public static string GenerateSolution()
     {
-        var colors = new[] { 'K', 'Z', 'P', 'S', 'L', 'N' };
+        var colors = new[] { 'K', 'Z', 'P', 'S', 'L', 'F' };
         var rand = new Random();
         var chars = new char[4];
         for (int i = 0; i < 4; i++)
