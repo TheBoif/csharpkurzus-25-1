@@ -8,6 +8,7 @@ class Program
 {
     static async Task Main(string[] args)
     {
+        Console.SetWindowSize(200,40);
         Console.CursorVisible = false;
         Console.BackgroundColor = ConsoleColor.DarkGray;
         Console.ForegroundColor = ConsoleColor.Black;
