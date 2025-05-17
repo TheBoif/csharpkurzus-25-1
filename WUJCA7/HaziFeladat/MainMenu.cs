@@ -6,17 +6,27 @@ using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        Console.ResetColor();
+        Console.CursorVisible = false;
+        Console.BackgroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.Black;
         Console.Clear();
+        Console.Write("Adja meg a nevét: ");
+        string playerName = "";
+        while (playerName == "")
+        {
+            playerName = Console.ReadLine() ?? "";
+        }
         Console.WriteLine();
         while (true)
         {
-            short input = -1;
+            int input = -1;
             while (input == -1)
             {
-                Console.ResetColor();
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.Clear();
                 Console.WriteLine("-== Mastermind ==-");
                 Console.WriteLine("Válassz egy lehetőséget:");
                 Console.WriteLine(" 1. - Új játék");
@@ -26,7 +36,7 @@ class Program
 
                 try
                 {
-                    input = Convert.ToInt16(Console.ReadLine());
+                    input = Convert.ToInt32(Console.ReadKey(true).KeyChar) - 48;
                 }
                 catch (FormatException)
                 {
@@ -35,27 +45,29 @@ class Program
                     Console.WriteLine("Kérlek egy számot adj meg!");
                     continue;
                 }
-                catch (OverflowException)
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("A megadott szám túl nagy vagy túl kicsi!");
-                    continue;
-                }
-
             }
 
             switch (input)
             {
                 case 1:
-                    GameLogic.StartNewGame("asd");
-                    Console.Clear();
+                    try
+                    {
+                        await GameLogic.StartNewGame(playerName);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Hiba történt a játék indításakor: " + ex.Message);
+                        Console.ReadKey(true);
+                    }
                     break;
                 case 2:
                     LeaderboardLogic.ViewLeaderboards();
-                    Console.Clear();
                     break;
                 case 3:
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.Clear();
                     Console.WriteLine("A játék célja, hogy kitaláld a titkos színkombinációt, mely 4 színből áll.");
                     Console.WriteLine("A színek a következők lehetnek:");
