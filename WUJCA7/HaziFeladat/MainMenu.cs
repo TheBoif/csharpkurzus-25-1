@@ -8,30 +8,56 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
+        Console.WriteLine();
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("-== Mastermind ==-");
-            Console.WriteLine("Válassz egy lehetőséget:");
-            Console.WriteLine(" start - Új játék");
-            Console.WriteLine(" ranglista - Ranglista");
-            Console.WriteLine(" exit - Kilépés");
-            string? input = Console.ReadLine();
-            if (input == null) input = string.Empty;
+            short input = -1;
+            while (input == -1)
+            {
+                Console.ResetColor();
+                Console.WriteLine("-== Mastermind ==-");
+                Console.WriteLine("Válassz egy lehetőséget:");
+                Console.WriteLine(" 1. - Új játék");
+                Console.WriteLine(" 2. - Ranglista");
+                Console.WriteLine(" 0. - Kilépés");
+
+                try
+                {
+                    input = Convert.ToInt16(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Kérlek egy számot adj meg!");
+                    continue;
+                }
+                catch (OverflowException)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("A megadott szám túl nagy vagy túl kicsi!");
+                    continue;
+                }
+            }
 
             switch (input)
             {
-                case "start":
+                case 1:
                     GameLogic.StartNewGame();
+                    Console.Clear();
                     break;
-                case "ranglista":
+                case 2:
                     LeaderboardLogic.ViewLeaderboards();
+                    Console.Clear();
                     break;
-                case "exit":
+                case 0:
                     return;
                 default:
+                Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("A megadott parancs nem érvényes.");
-                    Console.ReadKey();
                     break;
             }
         }
